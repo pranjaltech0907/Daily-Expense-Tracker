@@ -1,120 +1,92 @@
-# Daily Expense Tracker
-
-expenses = []  
-# global list to store all expense dictionaries
+expenses = []
 
 
-def show_menu():
-    print("     DAILY EXPENSE TRACKER    ")
-    print("1. Add New Expense")
-    print("2. View All Expenses")
-    print("3. View Total & Average")
-    print("4. Filter Expenses by Category")
+def menu():
+    print("\nDAILY EXPENSE TRACKER")
+    print("1. Add Expense")
+    print("2. Show Expenses")
+    print("3. Show Total and Average")
+    print("4. Search by Category")
     print("5. Exit")
-    
 
 
 def add_expense():
-    item_name = input("Enter expense name: ")
-    category = input(
-        "Enter category (Food/Travel/Bills/Other): "
-    ).capitalize()
+    name = input("Enter expense name: ")
+    category = input("Enter category: ")
+    amount = float(input("Enter amount: "))
 
-    # Type conversion and simple input handling
-    amount_str = input("Enter amount spent: ")
-    amount = float(amount_str)
+    expense = [name, category, amount]
+    expenses.append(expense)
 
-    # Using dictionaries and lists
-    record = {"item": item_name, "category": category, "amount": amount}
-
-    expenses.append(record)
-    print("Expense recorded successfully!")
+    print("Expense added successfully!")
 
 
-def view_all():
+def show_expenses():
     if len(expenses) == 0:
-        print("No expenses recorded yet.")
-        return
+        print("No expenses found.")
+    else:
+        print("\nYour Expenses:")
 
-    print("\n--- List of Expenses ---")
-    count = 1
-    # For loop iteration
-    for exp in expenses:
-        print(
-            str(count)
-            + ". "
-            + exp["item"]
-            + " | "
-            + exp["category"]
-            + " | Rs. "
-            + str(exp["amount"])
-        )
-        count = count + 1
+        for i in range(len(expenses)):
+            print(i + 1, expenses[i][0], expenses[i][1], "Rs.", expenses[i][2])
 
 
-def calculate_summary():
+def total_average():
     if len(expenses) == 0:
-        print("No data available to calculate total.")
-        return
+        print("No expenses found.")
+    else:
+        total = 0
 
-    total = 0.0
-    for exp in expenses:
-        # Arithmetic operators
-        total = total + exp["amount"]
+        for expense in expenses:
+            total = total + expense[2]
 
-    # Average calculation using basic division
-    average = total / len(expenses)
+        average = total / len(expenses)
 
-    print("\n--- Expense Summary ---")
-    print("Total Amount Spent: Rs. " + str(round(total, 2)))
-    print("Number of Expenses: " + str(len(expenses)))
-    print("Average per Expense: Rs. " + str(round(average, 2)))
+        print("Total = Rs.", total)
+        print("Average = Rs.", average)
 
 
-def differentiate_by_category():
-    if len(expenses) == 0:
-        print("No expenses recorded yet.")
-        return
-
-    search_cat = input(
-        "Enter category to search (Food/Travel/Bills/Other): "
-    ).capitalize()
+def search_category():
+    category = input("Enter category: ")
     found = False
-    subtotal = 0.0
+    total = 0
 
-    print("\n--- Expenses for: " + search_cat + " ---")
-    for exp in expenses:
-        if exp["category"] == search_cat:
-            print("- " + exp["item"] + ": Rs. " + str(exp["amount"]))
-            subtotal = subtotal + exp["amount"]
+    for expense in expenses:
+        if expense[1].lower() == category.lower():
+            print(expense[0], "Rs.", expense[2])
+            total = total + expense[2]
             found = True
 
     if found == False:
-        print("No records found under this category.")
+        print("No expense found.")
     else:
-        print("Category Subtotal: Rs. " + str(round(subtotal, 2)))
+        print("Category Total = Rs.", total)
 
 
-# Main driver loop
-def main():
-    while True:
-        show_menu()
-        choice = input("Enter choice (1-5): ")
+while True:
 
-        # Control flow using if-elif-else
-        if choice == "1":
-            add_expense()
-        elif choice == "2":
-            view_all()
-        elif choice == "3":
-            calculate_summary()
-        elif choice == "4":
-            differentiate_by_category()
-        elif choice == "5":
-            print("Exiting application. Goodbye!")
-            break
-        else:
-            print("Invalid input! Please enter a number between 1 and 5.")
+    menu()
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_expense()
+
+    elif choice == "2":
+        show_expenses()
+
+    elif choice == "3":
+        total_average()
+
+    elif choice == "4":
+        search_category()
+
+    elif choice == "5":
+        print("Thank you!")
+        break
+
+    else:
+        print("Wrong choice!")
 
 
-main()
+  
