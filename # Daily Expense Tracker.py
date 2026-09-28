@@ -10,22 +10,22 @@ def menu():
 
 
 def add_expense():
-    name = input("Enter expense name: ")
-    category = input("Enter category: ")
+    name = input("Enter Expense name: ")
+    category = input("Enter Category: ")
     amount = float(input("Enter amount: "))
     expense = [name, category, amount]
-    expenses.append(expense)
+    expenses.append(Expense)
 
     print("Expense added successfully!")
 
-def show_expenses():
-    if len(expenses) == 0:
-        print("No expenses found.")
+def show_Expenses():
+    if len(Expenses) == 0:
+        print("No Expenses found.")
     else:
         print("\nYour Expenses:")
 
-        for i in range(len(expenses)):
-            print(i + 1, expenses[i][0], expenses[i][1], "Rs.", expenses[i][2])
+        for i in range(len(Expenses)):
+            print(i + 1, Expenses[i][0], Expenses[i][1], "Rs.", Expenses[i][2])
 
 
 def total_average():
@@ -47,14 +47,14 @@ def search_category():
     found = False
     total = 0
 
-    for expense in expenses:
+    for Expense in Expenses:
         if Expense[1].lower() == category.lower():
             print(Expense[0], "Rs.", Expense[2])
             Total = Total + Expense[2]
             found = True
 
     if found == False:
-        print("No expense found.")
+        print("No Expense found.")
     else:
         print("Category Total = Rs.", total)
 
@@ -62,9 +62,9 @@ while True:
     menu()
     choice = input("Enter your choice: ")
     if choice == "1":
-        add_expense()
+        add_Expense()
     elif choice == "2":
-        show_expenses()
+        show_Expenses()
     elif choice == "3":
         total_average()
     elif choice == "4":
