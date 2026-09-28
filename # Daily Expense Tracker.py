@@ -1,6 +1,5 @@
 expenses = []
 
-
 def menu():
     print("\nDAILY EXPENSE TRACKER")
     print("1. Add Expense")
@@ -14,12 +13,10 @@ def add_expense():
     name = input("Enter expense name: ")
     category = input("Enter category: ")
     amount = float(input("Enter amount: "))
-
     expense = [name, category, amount]
     expenses.append(expense)
 
     print("Expense added successfully!")
-
 
 def show_expenses():
     if len(expenses) == 0:
@@ -41,7 +38,6 @@ def total_average():
             total = total + expense[2]
 
         average = total / len(expenses)
-
         print("Total = Rs.", total)
         print("Average = Rs.", average)
 
@@ -52,9 +48,9 @@ def search_category():
     total = 0
 
     for expense in expenses:
-        if expense[1].lower() == category.lower():
-            print(expense[0], "Rs.", expense[2])
-            total = total + expense[2]
+        if Expense[1].lower() == category.lower():
+            print(Expense[0], "Rs.", Expense[2])
+            Total = Total + Expense[2]
             found = True
 
     if found == False:
@@ -62,29 +58,20 @@ def search_category():
     else:
         print("Category Total = Rs.", total)
 
-
 while True:
-
     menu()
-
     choice = input("Enter your choice: ")
-
     if choice == "1":
         add_expense()
-
     elif choice == "2":
         show_expenses()
-
     elif choice == "3":
         total_average()
-
     elif choice == "4":
         search_category()
-
     elif choice == "5":
         print("Thank you!")
         break
-
     else:
         print("Wrong choice!")
 
